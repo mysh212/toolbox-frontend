@@ -38,6 +38,7 @@
                   </div>
                   <div class = 'card-action'>
                     <a :href = ' j.url ' class = 'card-link'>LINK</a>
+                    <a :href = '`https://api.citrc.tw/moodlapi/course/content/get_file?session=${id}&n=${JSON.stringify([course_id, l, k])}`' class = 'card-link' v-if = 'j.type == "modtype_resource"'>GET</a>
                     <div class = 'chip right truncate'>{{ j.type }}</div>
                   </div>
                 </div>
