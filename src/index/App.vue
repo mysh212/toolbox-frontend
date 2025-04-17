@@ -58,10 +58,11 @@ export default {
         name: undefined
       },
       data: [
-        ['台南市公車', 'tainan_bus', 'directions_transit', 'teal', true, '台南市公車'],
-        ['宿舍公車', 'ncku_bus', 'directions_railway', 'grey', true, '通往宿舍的公車'],
-        ['MoodlAPI', 'moodlapi', 'drafts', 'orange', true, 'Moodle ，但是好看多了'],
-        ['NCKU Database', 'NCKU_database', 'donut_large', 'purple', false, 'ououo']
+        ['台南市公車', 'tainan_bus', 'directions_transit', 'teal', true, '台南市公車', true],
+        ['宿舍公車', 'ncku_bus', 'directions_railway', 'grey', true, '通往宿舍的公車', true],
+        ['MoodlAPI', 'moodlapi', 'drafts', 'orange', true, 'Moodle ，但是好看多了', true],
+        ['NCKU Database', 'NCKU_database', 'donut_large', 'purple', false, 'ououo', true],
+        ['NCKU Courseapi', 'NCKU_courseapi', 'donut_large', 'yellow', false, '開發中', false]
       ],
       t: 0
     };
@@ -112,5 +113,9 @@ export default {
 <style>
 html {
   background-color: #eee;
+}
+.material-icons {
+    display: inline-flex;
+    vertical-align: middle;
 }
 </style>

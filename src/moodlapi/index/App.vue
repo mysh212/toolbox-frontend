@@ -9,6 +9,8 @@
   <p v-if = 'search'> 搜尋: <b> {{ search }} </b> </p>
 </div>
 <div>
+
+  <div class = 'btn waves-effect green hoverable' @click = 'extend' :class = 'extended ? "disabled" : ""'> 延長連線時間 </div>
   <!-- <a class="waves-effect waves-light btn modal-trigger" :href="`#modal${t}`">Modal</a> -->
   <div v-for='i, j in courses' :key = 'j'>
   <!-- <div v-for="i in [1,2,3]" :key="i"> -->
@@ -81,7 +83,8 @@ export default {
       courses: [],
       loading: true,
       t: [],
-      search: ''
+      search: '',
+      extended: false
     };
   },
   components: {
@@ -90,6 +93,7 @@ export default {
   mounted () {
     // this.loading = true;
     M.AutoInit();
+    if(localStorage.getItem('extended') != undefined) this.extended = true;
     if(localStorage.getItem('moodleID') == undefined) location.href = '/moodlapi_login.html'
     this.id = localStorage.getItem('moodleID')
     $.post('https://api.citrc.tw/moodlapi/get_courses', {
@@ -99,9 +103,7 @@ export default {
       if(!response['ok']) {
         M.toast({html: response['error'], classes: 'rounded red'})
         if(response['data'] != undefined && response['data']['logout']) {
-          localStorage.removeItem('moodleID')
-          localStorage.removeItem('moodleName')
-          location.href = '/moodlapi_login.html?expired=1'
+          location.href = '/moodlapi_login.html?expired=1&exlogout'
         }
       }
       else this.courses = response['data']
@@ -126,6 +128,20 @@ export default {
     })
   },
   methods: {
+    extend() {
+      $.post('https://api.citrc.tw/moodlapi/extend_session', {
+        'session': this.id,
+        'id': localStorage.getItem('id')
+      }, (response) => {
+        response = JSON.parse(response);
+        if(!response['ok']) M.toast({html: response.error, classes: 'red rounded'})
+        else {
+          M.toast({html: '<i class = material-icons> check </i> 成功', classes: 'green rounded'})
+          localStorage.setItem('extended', true)
+          this.extended = true
+        }
+      })
+    },
     isint(x){
       return /^\d+$/.test(x);
     },

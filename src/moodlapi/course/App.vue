@@ -131,9 +131,7 @@ export default {
       if(!response['ok']) {
         M.toast({html: response['error'], classes: 'rounded red'})
         if(response['data'] != undefined && response['data']['logout']) {
-          localStorage.removeItem('moodleID')
-          localStorage.removeItem('moodleName')
-          location.href = '/moodlapi_login.html?expired=1'
+          location.href = '/moodlapi_login.html?expired=1&exlogout'
         }
       }
       else this.courses = response['data']
@@ -157,9 +155,7 @@ export default {
         if(!response['ok']) {
           M.toast({html: "<i class = 'material-icons'>error</i>" + response['error'], classes: 'red rounded'})
           if(response['data'] != undefined && response['data']['logout']) {
-            localStorage.removeItem('moodleID')
-            localStorage.removeItem('moodleName')
-            location.href = '/moodlapi_login.html'
+            location.href = '/moodlapi_login.html?expired=1&exlogout'
           }
         } else this.test = response['data']
         this.loading = false

@@ -137,6 +137,7 @@ export default {
         let as = new URLSearchParams(window.location.search);
         if(as.has('expired')) M.toast({html: 'Session expired', classes: 'red rounded'})
         if(as.has('logout')) M.toast({html: 'bye', classes: 'blue rounded'})
+        if(as.has('exlogout')) this.logout(), M.toast({html: 'bye', classes: 'blue rounded'})
         $('#username')[0].focus();
         this.moodleID = localStorage.getItem('moodleID')
 
@@ -189,6 +190,7 @@ export default {
         logout() {
             localStorage.removeItem('moodleID')
             localStorage.removeItem('moodleName')
+            localStorage.removeItem('extended')
             location.href = ('/moodlapi_login.html?mdlogout')
         }
     }

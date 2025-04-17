@@ -60,10 +60,7 @@ export default {
         if(!response['ok']) {
           M.toast({html: response['error'], classes: 'red rounded'})
           if(response['data'] != undefined && responsep['data']['logout']) {
-            localStorage.removeItem('moodleID')
-            localStorage.removeItem('moodleName')
-            localStorage.removeItem('username')
-            location.href = '/moodlapi_login.html'
+            location.href = '/moodlapi_login.html?expired=1&exlogout'
           }
         }
         this.data = JSON.stringify(response.data)
