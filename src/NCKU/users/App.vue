@@ -12,7 +12,7 @@
       <h3 class = right> {{ i['宿舍'] }} </h3><br>
       <div class = 'chip right pink' v-if = 'i["宿舍候補序號"]'> 候補序號 </div>
       <b class = 'grey-text large right' v-if = 'i["宿舍候補序號"]'> <h5> {{ i["宿舍候補序號"] }} </h5> </b>
-      <h3 class = cyan-text> {{ i.fullname }} </h3>
+      <h3 class = cyan-text> {{ i.fullname }} </h3> 
       <div class = 'amber chip'> 學院 </div>
       <b class = amber-text> {{ i.department }} </b>
       <b class = 'grey-text right'> {{ i.idnumber }} </b>
@@ -22,6 +22,16 @@
           <b class = grey-text> {{ k }} </b>
         </template>
       </div>
+      <template v-if = 'i.idnumber && i.idnumber?.length == 9'>
+        <div>
+          <div class = chip> 入學方式 </div>
+          <b> {{ get_tunnel(i.idnumber) }} </b>
+        </div>
+        <div>
+          <div class = chip> 入學年度 </div>
+          <b> {{ get_year(i.idnumber) }} </b>
+        </div>
+      </template>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-blue btn-flat">Close</a>
@@ -178,6 +188,23 @@ export default {
         setTimeout(M.AutoInit, 100)
         this.now_search = this.search
       })
+    },
+    get_tunnel(x) {
+      x = parseInt(x.slice(5, 6));
+      let pre = {
+        0: '體保生',
+        1: '指考 / 分科',
+        4: '繁星 / 特殊選材',
+        5: '僑生',
+        6: '學測申請',
+        7: '外籍生',
+        8: '交換生'
+      };
+      // M.toast({html: x});
+      return (pre[x] ? pre[x] : '未知');
+    },
+    get_year(x) {
+      return '1' + x.slice(3,5);
     },
     get_page(o = false) {
       if(!this.isint(this.user_page) || this.user_page <= 0 || this.user_page > this.all_pages) {

@@ -30,6 +30,7 @@ module.exports = defineConfig({
     moodlapi_login: 'src/moodlapi/login/main.js',
     moodlapi: 'src/moodlapi/index/main.js',
     moodlapi_course: 'src/moodlapi/course/main.js',
-    NCKU_database: 'src/NCKU/users/main.js'
+    NCKU_database: 'src/NCKU/users/main.js',
+    NCKU_courseapi: 'src/courseapi/main.js'
   }
 })
