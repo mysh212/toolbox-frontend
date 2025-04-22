@@ -1,19 +1,21 @@
 <template>
 
-  <div class = row>
-    <div class = 'card col s12 m5 l3 center-align'>
-      <div class="progress" v-if='loading'>
-        <div class="indeterminate"></div>
-      </div>
-      <div class = card-content>
-        <b class = card-title> <i class = material-icons> insert_chart </i>成大圖書館現況 </b>
-        <div class = row>
-          <div v-for = 'i, j in data' class = 'col s4' :key = 'j'>
-            <b> {{ '總館 醫分館 新K館 D-24 未來館'.split(' ')[j] }} </b>
-            <h3 class = blue-text> {{ i[1][0] }} </h3>
-            <div class = divider />
-            <b class = grey-text> {{ i[1][1] }} </b>
+  <div class = 'card col s12 m5 l3 center-align'>
+    <div class="progress" v-if='loading'>
+      <div class="indeterminate"></div>
+    </div>
+    <div class = card-content>
+      <b class = card-title> <i class = material-icons> insert_chart </i>成大圖書館現況 </b>
+      <div class = row>
+        <div v-for = 'i, j in data' class = 'col s4' :key = 'j'>
+          <b> {{ '總館 醫分館 新K館 D-24 未來館'.split(' ')[j] }} </b>
+          <h3 :class = '`${color}-text`'> {{ i[1][0] }} </h3>
+          <!-- <div class = divider /> -->
+          
+          <div class="progress">
+            <div class="determinate" :style="`width: ${get_rate(i[1][0], i[1][1])}%`"></div>
           </div>
+          <b class = grey-text> {{ i[1][1] }} </b>
         </div>
       </div>
     </div>
@@ -46,7 +48,8 @@ export default {
     })
   },
   props: {
-    id: ''
+    id: '',
+    color: 'blue'
   },
   methods: {
     init(deloading = false) {
@@ -69,9 +72,11 @@ export default {
       if(!getblack) pre = pre.slice(0, -1)
       return pre[Math.floor(Math.random() * pre.length)]
     },
-    // mdinit(deloading = false) {
-
-    // },
+    get_rate(a, b) {
+      a = parseInt(a.replace(',', ''))
+      b = parseInt(b.replace(',', ''))
+      return Math.round(a * 100 / b);
+    },
     isint(x){
       return /^\d+$/.test(x);
     }
