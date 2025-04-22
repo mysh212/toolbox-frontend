@@ -17,7 +17,7 @@
       <b class = amber-text> {{ i.department }} </b>
       <b class = 'grey-text right'> {{ i.idnumber }} </b>
       <div v-for = 'k, l in i' :key = 'l'>
-        <template v-if = '!["fullname", "department", "idnumber", "profileimageurlsmall", "profileimageurl", "宿舍", "宿舍候補序號"].includes(l) && k != null'>
+        <template v-if = '!["fullname", "department", "idnumber", "profileimageurlsmall", "profileimageurl", "宿舍", "宿舍候補序號", "old_dorm"].includes(l) && k != null'>
           <div class = chip> {{ l }} </div>
           <b class = grey-text> {{ k }} </b>
         </template>
@@ -32,6 +32,22 @@
           <b> {{ get_year(i.idnumber) }} </b>
         </div>
       </template>
+      <table v-if = 'i.old_dorm?.length != 0'>
+        <thead>
+          <tr>
+            <td v-for = 'j, k in i.old_dorm[0]' :key = 'j'>
+              <b> {{ k }} </b>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for = 'j in i.old_dorm' :key = 'j' :class = 'j["年段"] == 113 ? "orange-text" : ""'>
+            <td v-for = 'k in j' :key = 'k'>
+              {{ k }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-blue btn-flat">Close</a>
@@ -88,18 +104,22 @@
   <table>
     <thead>
       <tr>
-        <th v-for='i, j in result[0]' :key='i'>
-          <a class = 'waves-block waves-effect' :class = 'sort == j ? "cyan-text" : "black-text"' @click = 'sort = (sort == j ? null : j); find()'> {{ j }} </a>
-        </th>
+        <template v-for='i, j in result[0]' :key='i'>
+          <th v-if = 'j != "old_dorm"'>
+            <a class = 'waves-block waves-effect' :class = 'sort == j ? "cyan-text" : "black-text"' @click = 'sort = (sort == j ? null : j); find()'> {{ j }} </a>
+          </th>
+        </template>
       </tr>
     </thead>
     <tbody>
       <tr class='hoverable modal-trigger' v-for='i, j in result' :key='j' :href = '`#user${j}`'>
-        <td v-for='k in i' :key='k'>
-          <!-- <div class='chip'> {{ l }} </div> -->
-          <img  class = 'center-align' :src = 'k' v-if = 'k != null && k != undefined && k.toString().indexOf("moodle.ncku.edu.tw") != -1' width = '25px' height = '25px'/>
-          <template v-else> {{ k }} </template>
-        </td>
+        <template v-for='k, l in i' :key='k'>
+          <td v-if = 'l != "old_dorm"'>
+            <!-- <div class='chip'> {{ l }} </div> -->
+            <img  class = 'center-align' :src = 'k' v-if = 'k != null && k != undefined && k.toString().indexOf("moodle.ncku.edu.tw") != -1' width = '25px' height = '25px'/>
+            <template v-else> {{ k }} </template>
+          </td>
+        </template>
       </tr>
     </tbody>
   </table>
@@ -187,6 +207,7 @@ export default {
         setTimeout(M.updateTextFields, 100)
         setTimeout(M.AutoInit, 100)
         this.now_search = this.search
+        // for(var i = 0; i<this.result.length;i++) this.result[i]['old_dorm'] = JSON.parse(this.result[i]['歷年宿舍']);
       })
     },
     get_tunnel(x) {
