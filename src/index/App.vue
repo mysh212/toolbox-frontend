@@ -22,6 +22,7 @@
         </div>
       </div>
     </div>
+    <library v-if = 'user.name' :id = 'user.id' />
     <template v-for = 'i in data'>
       <div class='col s12 m5 l3' :key = 'i' v-if = 'user.name || i[4]'>
         <a class='card waves-block waves-effect hoverable black-text' :class = '`waves-${i[3]}`' :href = '`${i[1]}.html`'>
@@ -41,7 +42,7 @@
 <script>
 /*eslint-disable*/
 import jQuery from 'jquery';
-// import materialize from '/home/ysh/lab/vue/script/materialize'
+import library from '@/index/library.vue'
 import M from 'materialize-css'
 
 export default {
@@ -66,6 +67,9 @@ export default {
       ],
       t: 0
     };
+  },
+  components: {
+    library
   },
   mounted () {
     M.AutoInit();
