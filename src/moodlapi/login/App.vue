@@ -13,7 +13,23 @@
             <div class='card-content grey-text'>
                 {{ moodleID }}
             </div>
-            <img :src = '`https://api.qrserver.com/v1/create-qr-code/?data=${moodleID}&amp;`' />
+            <div id = 'img'>
+                <img :src = '`https://api.qrserver.com/v1/create-qr-code/?data=${moodleID}&amp;`' height = '250px' width = '250px' id = 'qr' />
+                <div id = 'label' class = '' v-if = '!ok'>
+                    <div class="preloader-wrapper big active">
+                        <div class="spinner-layer" v-for = 'i in [`blue`, `yellow`, `red`, `green`]' :key = 'i' :class = '`spinner-${i}`'>
+                            <div class="circle-clipper left">
+                            <div class="circle"></div>
+                            </div><div class="gap-patch">
+                            <div class="circle"></div>
+                            </div><div class="circle-clipper right">
+                            <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <div class="flex center-align" style="height: 100vh; width: 100vw" v-else>
@@ -128,7 +144,8 @@ export default {
             p: '',
             loading: false,
             color: 'orange',
-            token: ''
+            token: '',
+            ok: false
         };
     },
     mounted () {
@@ -143,6 +160,10 @@ export default {
 
         var pre = ['red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'yellow', 'amber', 'orange', 'deep-orange', 'brown', 'grey', 'blue-grey', 'black']
         this.color = pre[Math.floor(Math.random() * pre.length)]
+        window.onload = () => {
+            while(!document.getElementById('qr').complete) this.ok = false;
+            this.ok = true;
+        }
     },
     methods: {
         random_color() {
@@ -206,5 +227,33 @@ export default {
     width:600px;
     height:600px;
     background-color:#eee;
+}
+#img {
+    display: grid;
+    place-content: center;
+    /* align-items: center;
+    justify-content: center; */
+    position: relative;
+    width: 250px;
+    height: 250px;
+}
+#qr {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+}
+#label {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    color: cyan;
+    /* background-color: red; */
+    z-index: 10;
 }
 </style>

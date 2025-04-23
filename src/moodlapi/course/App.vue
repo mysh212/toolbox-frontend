@@ -30,7 +30,31 @@
             <div class = 'row'>
               <div class = 'col s12 m4 s3' v-for = 'j, k in i.content' :key = 'j'>
                 <!-- <a class = 'btn' @click="p(course_id,k,l)">click me for cookies</a> -->
-                <div class = 'card waves-block waves-effect' :class = 'j.type == "modtype_forum" ? "waves-orange": ""' @click="(j.type == 'modtype_forum' ? p(course_id,k,l) : () => {})">
+                <div class = 'card waves-block waves-effect waves-orange hoverable' @click="p(course_id,k,l)" v-if = "j.type == 'modtype_forum'">
+                  <div class = 'card-content'>
+                    <div class = 'card-title_nav'>
+                      {{ j.name }}
+                    </div>
+                  </div>
+                  <div class = 'card-action'>
+                    <a :href = ' j.url ' class = 'card-link'>LINK</a>
+                    <!-- <div class = 'chip right truncate'>{{ j.type }}</div> -->
+                  </div>
+                </div>
+                <a class = 'card waves-block waves-effect waves-teal hoverable black-text' v-else-if = 'j.type == `modtype_resource`' :href = '`https://api.citrc.tw/moodlapi/course/content/get_file?session=${id}&n=${JSON.stringify([course_id, l, k])}`' target = '_blank'>
+                  <div class = 'card-content'>
+                    <div class = 'card-title_nav'>
+                      {{ j.name }}
+                    </div>
+                  </div>
+                  <div class = 'card-action'>
+                    <a :href = ' j.url ' class = 'card-link'>LINK</a>
+                    <a :href = '`https://api.citrc.tw/moodlapi/course/content/get_file?session=${id}&n=${JSON.stringify([course_id, l, k])}`' class = 'card-link'>GET</a>
+                    <!-- <div class = 'chip right truncate'>{{ j.type }}</div> -->
+                  </div>
+                </a>
+                
+                <div class = 'card waves-block waves-effect' :class = 'j.type == "modtype_forum" ? "waves-orange": ""' @click="(j.type == 'modtype_forum' ? p(course_id,k,l) : () => {})" v-else>
                   <div class = 'card-content'>
                     <div class = 'card-title_nav'>
                       {{ j.name }}
@@ -42,6 +66,7 @@
                     <div class = 'chip right truncate'>{{ j.type }}</div>
                   </div>
                 </div>
+                
               </div>
             </div>
           </div>

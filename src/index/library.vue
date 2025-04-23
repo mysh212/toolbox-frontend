@@ -6,17 +6,17 @@
     </div> -->
     <div class = card-content>
       <b class = card-title> <i class = material-icons> insert_chart </i>成大圖書館現況 </b>
-      <div class="preloader-wrapper big active" v-if = 'loading'>
-        <div class="spinner-layer spinner-blue-only">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div><div class="gap-patch">
-            <div class="circle"></div>
-          </div><div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
+        <div class="preloader-wrapper big active" v-if = 'loading'>
+            <div class="spinner-layer" v-for = 'i in [`blue`, `yellow`, `red`, `green`]' :key = 'i' :class = '`spinner-${i}`'>
+                <div class="circle-clipper left">
+                <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                <div class="circle"></div>
+                </div>
+            </div>
         </div>
-      </div>
       <div class = row>
         <div v-for = 'i, j in data' class = 'col s4' :key = 'j'>
           <b> {{ '總館 醫分館 新K館 D-24 未來館'.split(' ')[j] }} </b>

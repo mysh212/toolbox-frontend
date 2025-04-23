@@ -3,6 +3,18 @@
     <div class="indeterminate"></div>
   </div>
 
+  <div class = row>
+    <div class = 'col s12'>
+      <div class = 'card'>
+        <div class = 'card-content blue lighten-5'>
+          <div class = card-title> Hello, Early users </div>
+          <b> 早安，這是 Moodlapi 前端的 <font class = 'cyan-text'> Alpha 測試版 </font> ，也就是說，這裡的功能還非常不完善，請各位見諒，如果有發現 bug 或是有甚麼想要的新功能，歡迎來 <a href = 'https://github.com/mysh212/toolbox-frontend'> 這裡 </a> 提 <font class = 'red-text text-lighten-2'> Issue </font> 或 <font class = 'green-text lighten-1'> Pull Request </font> ouob</b>
+          <b class = 'right amber-text'> <i> ysh <sup> ST </sup> 2025 </i></b>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <div class = 'input-field'>
   <input type = 'text' v-model = 'search' id = 'search'/>
   <label for = 'search'><i class = 'material-icons'> search </i> 找課? </label>
@@ -38,7 +50,7 @@
 <div class = 'row'>
   <template v-for="i, j in courses" :key = 'i'>
     <div class = 'col s12 m4 l3' v-if = 'search == "" || i.name.indexOf(search) != -1'>
-      <a class = 'card waves-block waves-effect waves-red lighten-5'>
+      <a class = 'card waves-block waves-effect waves-red lighten-5 hoverable'>
         <div class = 'card-content modal-trigger' style="color: black" @click = 't[j] = true' :href = '`#modal${j}`'>
           <h5 class = 'truncate'>
             {{ i.name }}
