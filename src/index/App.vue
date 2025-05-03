@@ -23,6 +23,7 @@
       </div>
     </div>
     <library v-if = 'user.name' :id = 'user.id' color = blue />
+    <miui v-if = 'user.name' :id = 'user.id' />
     <template v-for = 'i in data'>
       <div class='col s12 m5 l3' :key = 'i' v-if = 'user.name || i[4]'>
         <a class='card waves-block waves-effect hoverable black-text' :class = '`waves-${i[3]}`' :href = '`${i[1]}.html`'>
@@ -43,6 +44,7 @@
 /*eslint-disable*/
 import jQuery from 'jquery';
 import library from '@/index/library.vue'
+import miui from '@/index/miui.vue'
 import M from 'materialize-css'
 
 export default {
@@ -69,7 +71,8 @@ export default {
     };
   },
   components: {
-    library
+    library,
+    miui
   },
   mounted () {
     M.AutoInit();
