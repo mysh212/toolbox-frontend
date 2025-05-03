@@ -12,7 +12,7 @@ module.exports = defineConfig({
       filename: 'index.html',
       // 当使用 title 选项时，
       // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
-      title: 'Index Page',
+      title: 'ysh\'s toolbox',
       // 在这个页面中包含的块，默认情况下会包含
       // 提取出来的通用 chunk 和 vendor chunk。
       chunks: ['chunk-vendors', 'chunk-common', 'index']
@@ -29,8 +29,10 @@ module.exports = defineConfig({
     ncku_bus: 'src/ncku-bus/main.js',
     moodlapi_login: 'src/moodlapi/login/main.js',
     moodlapi: 'src/moodlapi/index/main.js',
+    moodlapi2: 'src/moodlapi/index2.0/main.js',
     moodlapi_course: 'src/moodlapi/course/main.js',
     NCKU_database: 'src/NCKU/users/main.js',
-    NCKU_courseapi: 'src/courseapi/main.js'
+    NCKU_courseapi: 'src/courseapi/main.js',
+    test: 'src/test/main.js'
   }
 })
