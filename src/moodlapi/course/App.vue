@@ -53,6 +53,17 @@
                     <!-- <div class = 'chip right truncate'>{{ j.type }}</div> -->
                   </div>
                 </a>
+                <a class = 'card waves-block waves-effect waves-pink hoverable black-text' v-else-if = 'j.type == `modtype_assign`' @click = 'get_homework(course_id, l, k)'>
+                  <div class = 'card-content'>
+                    <div class = 'card-title_nav'>
+                      {{ j.name }}
+                    </div>
+                  </div>
+                  <div class = 'card-action'>
+                    <a :href = ' j.url ' class = 'card-link'>LINK</a>
+                    <!-- <div class = 'chip right truncate'>{{ j.type }}</div> -->
+                  </div>
+                </a>
                 
                 <div class = 'card waves-block waves-effect' :class = 'j.type == "modtype_forum" ? "waves-orange": ""' @click="(j.type == 'modtype_forum' ? p(course_id,k,l) : () => {})" v-else>
                   <div class = 'card-content'>
@@ -77,6 +88,14 @@
     <div :id = '`score${course_id}`'> <score :session = 'id' :id = 'course_id'></score> </div>
     <div :id = '`discuss${course_id}`'> <discuss :data = 'test'></discuss> </div>
   </div>
+
+  <table>
+    <tr v-for = 'i, j in tmp' :key = 'i'>
+      <td> {{ j }} </td>
+      <td> {{ i.content }} </td>
+      <td v-html = 'i.html'> </td>
+    </tr>
+  </table>
   <!-- <HelloWorld msg = 'ouob'/>
   <title_nav /> -->
   <!-- {{ c_id }} -->
@@ -126,7 +145,8 @@ export default {
       t: 0,
       test: undefined,
       discuss: false,
-      inited: false
+      inited: false,
+      tmp: []
     };
   },
   props: {
@@ -189,6 +209,18 @@ export default {
         location.href = '#discuss'
       })
       // M.toast({html: `${n} ${l} ${k}`})
+    },
+    get_homework(a, b, c) {
+      $.post('https://api.citrc.tw/moodlapi/get_assignment', {
+        session: this.id,
+        n: JSON.stringify([a, b, c])
+      }, (response) => {
+        // M.toast({html: response});
+        response = JSON.parse(response);
+        if(!response['ok']) M.toast({html: response.error, classes: 'red rounded'});
+        if(!response['ok'] && response.data.logout) location.href = 'moodlapi_login.html?exlogout=1'
+        this.tmp = response.data;
+      })
     },
     isint(x){
       return /^\d+$/.test(x);
