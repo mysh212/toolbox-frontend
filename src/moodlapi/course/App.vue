@@ -53,7 +53,18 @@
                     <!-- <div class = 'chip right truncate'>{{ j.type }}</div> -->
                   </div>
                 </a>
-                <a class = 'card waves-block waves-effect waves-pink hoverable black-text' v-else-if = 'j.type == `modtype_assign`' @click = 'get_homework(course_id, l, k)'>
+                <a class = 'card waves-block waves-effect waves-purple hoverable black-text' v-else-if = 'j.type == `modtype_assign`' @click = 'get_homework(course_id, l, k)'>
+                  <div class = 'card-content'>
+                    <div class = 'card-title_nav'>
+                      {{ j.name }}
+                    </div>
+                  </div>
+                  <div class = 'card-action'>
+                    <a :href = ' j.url ' class = 'card-link'>LINK</a>
+                    <!-- <div class = 'chip right truncate'>{{ j.type }}</div> -->
+                  </div>
+                </a>
+                <a class = 'card waves-block waves-effect waves-green hoverable black-text' v-else-if = 'j.type == `modtype_page`' @click = 'get_page(course_id, l, k)'>
                   <div class = 'card-content'>
                     <div class = 'card-title_nav'>
                       {{ j.name }}
@@ -65,7 +76,7 @@
                   </div>
                 </a>
                 
-                <div class = 'card waves-block waves-effect' :class = 'j.type == "modtype_forum" ? "waves-orange": ""' @click="(j.type == 'modtype_forum' ? p(course_id,k,l) : () => {})" v-else>
+                <div class = 'card waves-block waves-effect' v-else>
                   <div class = 'card-content'>
                     <div class = 'card-title_nav'>
                       {{ j.name }}
@@ -96,6 +107,20 @@
       <td v-html = 'i.html'> </td>
     </tr>
   </table>
+
+  <div :id='`html`' class="modal">
+    <div class="modal-content">
+      <!-- <h4>Modal Header</h4>
+      <p>A bunch of text {{ i }}</p> -->
+      <div class = 'card'>
+        <div class = 'card-content' v-html = 'html' />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+  <div v-html = 'html' />
   <!-- <HelloWorld msg = 'ouob'/>
   <title_nav /> -->
   <!-- {{ c_id }} -->
@@ -146,7 +171,8 @@ export default {
       test: undefined,
       discuss: false,
       inited: false,
-      tmp: []
+      tmp: [],
+      html: ''
     };
   },
   props: {
@@ -162,6 +188,11 @@ export default {
     // location.href = '#score'
     // M.toast({html: this.c_id != undefined, classes: 'blue rounded'})
     M.AutoInit();
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.modal');
+      var instances = M.Modal.init(elems);
+    });
     let as = new URLSearchParams(window.location.search);
     if(!as.has('id') && this.c_id == undefined) M.toast({html: 'No course ID given', classes: 'red rounded'})
     else this.course_id = as.get('id')
@@ -220,6 +251,20 @@ export default {
         if(!response['ok']) M.toast({html: response.error, classes: 'red rounded'});
         if(!response['ok'] && response.data.logout) location.href = 'moodlapi_login.html?exlogout=1'
         this.tmp = response.data;
+      })
+    },
+    get_page(a, b, c) {
+      $.post('https://api.citrc.tw/moodlapi/get_page', {
+        session: this.id,
+        n: JSON.stringify([a, b, c])
+      }, (response) => {
+        // M.toast({html: response});
+        response = JSON.parse(response);
+        if(!response['ok']) M.toast({html: response.error, classes: 'red rounded'});
+        if(!response['ok'] && response.data.logout) location.href = 'moodlapi_login.html?exlogout=1'
+        location.href = '#html';
+        console.log(M.Modal.init($('#html')[0]).open());
+        this.html = response.data;
       })
     },
     isint(x){
