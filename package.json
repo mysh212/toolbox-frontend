@@ -10,7 +10,6 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "jquery": "^3.7.1",
-    "jQuery": "^1.7.4",
     "material-design-icons": "^3.0.1",
     "material-design-icons-iconfont": "^6.7.0",
     "materialize-css": "^1.0.0-rc.2",
