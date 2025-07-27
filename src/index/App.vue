@@ -42,7 +42,7 @@
 
 <script>
 /*eslint-disable*/
-import jQuery from 'jquery';
+import $ from 'jquery';
 import library from '@/index/library.vue'
 import miui from '@/index/miui.vue'
 import M from 'materialize-css'

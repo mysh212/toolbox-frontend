@@ -1,22 +1,36 @@
+import 'material-design-icons/iconfont/material-icons.css'
+import 'materialize-css/dist/css/materialize.min.css'
+import 'materialize-css/dist/js/materialize.min.js'
+import $ from 'jquery';
+window.$ = window.jQuery = $;
 import { createApp } from 'vue'
 import App from './App.vue'
-import nav from '../title/App.vue'
+import nav from '@/title/App.vue'
 
-import jQuery from 'jquery';
-<script
-  src="https://code.jquery.com/jquery-3.7.1.min.js"
-  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-  crossorigin="anonymous"></script>
-
-import 'materialize-css/dist/css/materialize.min.css'
-import 'material-design-icons/iconfont/material-icons.css'
-import 'materialize-css'
-import 'materialize-css/dist/js/materialize.min.js'
+// createApp(App).mount('#app')
 
 
-Object.assign(window, { $: jQuery, jQuery });
-// window.$ = window.jQuery = jQuery
-createApp(App).mount('#app')
-createApp(nav).mount('#nav')
+// Vuetify
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
 
-  
+// Components
+// import App from './App.vue'
+
+const vuetify = createVuetify({
+  components,
+  directives,
+  icons: {
+    defaultSet: 'mdi',
+    aliases,
+    sets: {
+      mdi,
+    },
+  },
+})
+
+createApp(App).use(vuetify).mount('#app')
+createApp(nav).use(vuetify).mount('#nav')

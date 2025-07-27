@@ -71,7 +71,7 @@
 
 <script>
 /*eslint-disable*/
-import jQuery from 'jquery';
+import $ from 'jquery';
 // import materialize from '/home/ysh/lab/vue/script/materialize'
 import M from 'materialize-css'
 

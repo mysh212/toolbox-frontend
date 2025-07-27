@@ -8,7 +8,7 @@
 <script>
 /*eslint-disable*/
 import { $emit } from 'vue';
-import jQuery from 'jquery';
+import $ from 'jquery';
 import library from '@/test/library.vue'
 import M from 'materialize-css'
 

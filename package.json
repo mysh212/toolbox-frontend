@@ -16,7 +16,8 @@
     "materialize-css": "^1.0.0-rc.2",
     "vue": "^3.2.13",
     "vue-materialize-datatable": "^1.0.4",
-    "vue-qrcode-reader": "^5.7.1"
+    "vue-qrcode-reader": "^5.7.1",
+    "vuetify": "^3.9.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
