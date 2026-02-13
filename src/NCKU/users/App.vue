@@ -163,8 +163,13 @@ export default {
   mounted () {
     M.AutoInit();
     // this.find(true)
-    
+  
     this.user.id = localStorage.getItem('id')
+    var url = new URL(location.href);
+    if(url.searchParams.has('p')) {
+      this.search = url.searchParams.get('p');
+      this.find();
+    }
       // if(this.user.id) $.post('https://api.citrc.tw/wbox/whoami', {'id': this.user.id}, (response) => {
       //       // alert(response)
       //       response = JSON.parse(response)

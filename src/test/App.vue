@@ -29,7 +29,7 @@ export default {
   methods: {
     get_test() {
       // this.test = library.$.test();                          
-      $emit('1', '2')
+      // $emit('1', '2')
     }
   }
 };
