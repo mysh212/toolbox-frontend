@@ -61,7 +61,7 @@ export default {
                 password: this.password
             }, (response) => {
                 // alert(response);
-                response = JSON.parse(response);
+                // // response = JSON.parse(response);
                 if(response['ok']) {
                     localStorage.setItem('id', response['id']);
                     location.href='/?login';

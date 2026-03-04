@@ -34,7 +34,7 @@ export default {
     init(deloading = false) {
       this.user.id = localStorage.getItem('id')
       if(this.user.id) $.post('https://api.citrc.tw/wbox/whoami', {'id': this.user.id}, (response) => {
-        response = JSON.parse(response);
+        // response = JSON.parse(response);
         if(!response['ok']) {
           M.toast({html: response.error, classes: 'red rounded'})
           if(response.data?.logout) {

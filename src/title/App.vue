@@ -85,7 +85,7 @@ export default {
         
         $.post('https://api.citrc.tw/wbox/whoami', {'id': this.id}, (response) => {
             // alert(response)
-            response = JSON.parse(response)
+            // response = JSON.parse(response)
             if(!response['ok']) localStorage.removeItem('id'), this.id = undefined;
             else this.user = response['data'];
             if(location.href.indexOf('?login') != -1) M.toast({html: '<i class=\'material-icons\' style=\'padding-right: 10px;\'> check_circle </i> Hello, ' + this.user, classes: 'green rounded'})
@@ -98,7 +98,7 @@ export default {
     },
     methods: {
         logout() {
-            $.post('//api.citrc.tw/wbox/logout', {'id': this.id}, (response) => {
+            $.post('https://api.citrc.tw/wbox/logout', {'id': this.id}, (response) => {
                 // alert(response);
                 localStorage.removeItem('id');
                 if(localStorage.getItem('error') != undefined) M.toast({html: localStorage.getItem('error'), classes: 'red rounded'})

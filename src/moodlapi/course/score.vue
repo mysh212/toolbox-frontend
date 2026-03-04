@@ -56,7 +56,7 @@ export default {
         session: this.session,
         n: this.id
       }, (response) => {
-        response = JSON.parse(response);
+        // response = JSON.parse(response);
         if(!response['ok']) {
           M.toast({html: response['error'], classes: 'red rounded'})
           if(response['data'] != undefined && responsep['data']['logout']) {

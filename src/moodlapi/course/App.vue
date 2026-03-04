@@ -247,7 +247,7 @@ export default {
         n: JSON.stringify([a, b, c])
       }, (response) => {
         // M.toast({html: response});
-        response = JSON.parse(response);
+        // response = JSON.parse(response);
         if(!response['ok']) M.toast({html: response.error, classes: 'red rounded'});
         if(!response['ok'] && response.data.logout) location.href = 'moodlapi_login.html?exlogout=1'
         this.tmp = response.data;
@@ -259,7 +259,7 @@ export default {
         n: JSON.stringify([a, b, c])
       }, (response) => {
         // M.toast({html: response});
-        response = JSON.parse(response);
+        // response = JSON.parse(response);
         if(!response['ok']) M.toast({html: response.error, classes: 'red rounded'});
         if(!response['ok'] && response.data.logout) location.href = 'moodlapi_login.html?exlogout=1'
         location.href = '#html';

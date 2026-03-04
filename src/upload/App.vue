@@ -52,7 +52,7 @@ export default {
         this.id = localStorage.getItem('id')
         if(this.id != undefined) {
             $.post('//api.citrc.tw/wbox/whoami', {'id': this.id}, (response) => {
-                response = JSON.parse(response);
+                // response = JSON.parse(response);
                 if(!response['ok']) this.id = undefined, localStorage.removeItem('id'), location.href = '/';
                 else this.user = response['data'];
             })
@@ -90,7 +90,7 @@ export default {
                 tag: JSON.stringify(f),
                 content: this.details
             }, (response) => {
-                response = JSON.parse(response);
+                // response = JSON.parse(response);
                 M.toast(response);
             });
         }

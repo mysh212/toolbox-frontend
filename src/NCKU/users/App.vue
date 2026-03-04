@@ -196,7 +196,7 @@ export default {
         n: this.page,
         sort: this.sort
       }, (response) => {
-        response = JSON.parse(response.replace('nan', 'None'))
+        // response = JSON.parse(response.replace('nan', 'None'))
         if(!response['ok']) {
           if(response.data.logout) {
             localStorage.setItem('error', response.error)

@@ -178,7 +178,7 @@ export default {
                 password: this.password
             }, (response) => {
                 // alert(response);
-                response = JSON.parse(response);
+                // response = JSON.parse(response);
                 if(response['ok']) {
                     this.moodleID = response['data']
                     localStorage.setItem('moodleID', response['data']['session'])
@@ -193,7 +193,7 @@ export default {
                 session: this.token
             }, (response) => {
                 // alert(response);
-                response = JSON.parse(response);
+                // response = JSON.parse(response);
                 if(response['ok']) {
                     this.moodleID = response['data']
                     localStorage.setItem('moodleID', response['data']['session'])
