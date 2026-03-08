@@ -65,7 +65,8 @@ export default {
         ['宿舍公車', 'ncku_bus', 'directions_railway', 'grey', true, '通往宿舍的公車', true],
         ['MoodlAPI', 'moodlapi', 'drafts', 'orange', true, 'Moodle ，但是好看多了', true],
         ['NCKU Database', 'NCKU_database', 'donut_large', 'purple', false, 'ououo', true],
-        ['NCKU Courseapi', 'NCKU_courseapi', 'donut_large', 'yellow', false, '開發中', false]
+        ['NCKU Courseapi', 'NCKU_courseapi', 'donut_large', 'yellow', false, '開發中', false],
+        ['The New Toolbox', 'https://toolbox.ysh.xx.kg/#', 'update', 'cyan', false, '新的工具箱', false]
       ],
       t: 0
     };

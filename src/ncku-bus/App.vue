@@ -85,7 +85,7 @@ export default {
       route: null,
       route_history: new Set(),
       app: '',
-      to: JSON.parse('{"10450":"0","10451":"1","1070":"0","1077":"1","1117":"1","1412":"0","1602":"1","2902":"0","10019":"1","10162":"0"}'),
+      to: JSON.parse('{"2101":"0","10450":"0","10451":"1","1070":"0","1077":"1","1117":"1","1412":"0","1602":"1","2902":"0","10019":"1","10162":"0"}'),
       rev: false,
       loading: false
     };
@@ -123,6 +123,10 @@ export default {
       if(rev) {
         this.get_stop('台南火車站(南站)',1);
         this.get_stop('台南火車站(北站)',1);
+        this.get_stop('臺南火車站(成功路A)',1);
+        this.get_stop('臺南火車站(成功路B)',1);
+        this.get_stop('臺南火車站(中山路C)',1);
+        this.get_stop('臺南火車站(中山路D)',1);
         this.get_stop('香格里拉飯店',1);
       } else {
         this.get_stop('成大醫院(小東路)');
