@@ -179,6 +179,9 @@ export default {
             }, (response) => {
                 // alert(response);
                 // response = JSON.parse(response);
+                if (typeof response == 'string') {
+                    response = JSON.parse(response);
+                }
                 if(response['ok']) {
                     this.moodleID = response['data']
                     localStorage.setItem('moodleID', response['data']['session'])

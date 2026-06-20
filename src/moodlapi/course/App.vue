@@ -204,7 +204,10 @@ export default {
       session: this.id,
       n: this.course_id
     }, (response) => {
-      response = JSON.parse(response)
+      // response = JSON.parse(response)
+      if (typeof response == 'string') {
+          response = JSON.parse(response);
+      }
       if(!response['ok']) {
         M.toast({html: response['error'], classes: 'rounded red'})
         if(response['data'] != undefined && response['data']['logout']) {
@@ -228,7 +231,10 @@ export default {
         n: JSON.stringify([n, l, k])
       }, (response) => {
         // M.toast({html: response})
-        response = JSON.parse(response)
+        // response = JSON.parse(response)
+        if (typeof response == 'string') {
+            response = JSON.parse(response);
+        }
         if(!response['ok']) {
           M.toast({html: "<i class = 'material-icons'>error</i>" + response['error'], classes: 'red rounded'})
           if(response['data'] != undefined && response['data']['logout']) {
@@ -248,6 +254,9 @@ export default {
       }, (response) => {
         // M.toast({html: response});
         // response = JSON.parse(response);
+        if (typeof response == 'string') {
+            response = JSON.parse(response);
+        }
         if(!response['ok']) M.toast({html: response.error, classes: 'red rounded'});
         if(!response['ok'] && response.data.logout) location.href = 'moodlapi_login.html?exlogout=1'
         this.tmp = response.data;
@@ -260,6 +269,9 @@ export default {
       }, (response) => {
         // M.toast({html: response});
         // response = JSON.parse(response);
+        if (typeof response == 'string') {
+            response = JSON.parse(response);
+        }
         if(!response['ok']) M.toast({html: response.error, classes: 'red rounded'});
         if(!response['ok'] && response.data.logout) location.href = 'moodlapi_login.html?exlogout=1'
         location.href = '#html';

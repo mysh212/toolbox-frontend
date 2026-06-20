@@ -111,7 +111,10 @@ export default {
     $.post('https://api.citrc.tw/moodlapi/get_courses', {
       session: this.id
     }, (response) => {
-      response = JSON.parse(response)
+      // response = JSON.parse(response)
+      if (typeof response == 'string') {
+          response = JSON.parse(response);
+      }
       if(!response['ok']) {
         M.toast({html: response['error'], classes: 'rounded red'})
         if(response['data'] != undefined && response['data']['logout']) {
